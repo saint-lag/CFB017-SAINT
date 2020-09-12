@@ -46,4 +46,3 @@ refArquivoMulti.close()
 # C)
 # D)
 
-## QUESTÃO 5 ##
