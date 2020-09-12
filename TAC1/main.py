@@ -1,3 +1,4 @@
+import csv
 
 refArquivo = open("/Users/maias/Documents/GitHub/CFB017-SAINT/TAC1/TcCLB50671780.fasta")
 refArquivoMulti = open("/Users/maias/Documents/GitHub/CFB017-SAINT/TAC1/TriTrypDB-47_TcruziCLBrenerEsmeraldo-like_AnnotatedProteins.fasta")
@@ -23,6 +24,16 @@ refArquivo.close()
 
 ## QUESTÃO 2 ##
 
+'''TODO laço for que crie uma chave para cada vez que encontrar '>' e tenha como value tudo que venha depois de '>'. '''
+
+dicionario = {}
+
+for linha in refArquivoMulti.readline():
+    for caracter in linha:
+        if caracter == ">":
+            cabecalho += linha
+        
+
 cabecalho = refArquivoMulti.readline()[1:-1]
 sequencia = ""
 for linha in refArquivoMulti:
@@ -46,4 +57,4 @@ refArquivoMulti.close()
 # C)
 # D)
 
-## QUESTÃO 5 ##
+
