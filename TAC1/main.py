@@ -1,12 +1,12 @@
 import csv
 
-refArquivo = open("/Users/maias/Documents/GitHub/CFB017-SAINT/TAC1/TcCLB50671780.fasta")
-refArquivoMulti = open("/Users/maias/Documents/GitHub/CFB017-SAINT/TAC1/TriTrypDB-47_TcruziCLBrenerEsmeraldo-like_AnnotatedProteins.fasta")
 
 ## QUESTÃO 1 ##
 
 def questao1():
+'''FUNCIONANDO'''
 
+    refArquivo = open("/Users/maias/Documents/GitHub/CFB017-SAINT/TAC1/TcCLB50671780.fasta")
     primeira_linha = refArquivo.readline()[1:-1]
     cabecalho = ""
 
@@ -25,51 +25,66 @@ def questao1():
 
 
 ## QUESTÃO 2 ##
+'''MEMORY ERROR'''
 
 def questao2():
 
+    refArquivoMulti = open("/Users/maias/Documents/GitHub/CFB017-SAINT/TAC1/TriTrypDB-47_TcruziCLBrenerEsmeraldo-like_AnnotatedProteins.fasta")
+
     '''Para cada linha no arquivo que tenha '>', uma copia é gerada como elemento de uma lista '''
 
-    primeira_linha = ""
-    lines = []
-    for linha in refArquivoMulti:
-        for caracter in linha:
-            if caracter == ">":
-            
-                primeira_linha += linha
+    cabecalho = ""
+    label_list = []
+    seq_list = []
+    label_seq = {}
 
-            lines.append(primeira_linha)
-    
+    for line in refArquivoMulti:
+        line = line.strip()
+        for i in line:
+            if i == ">":
+                label_list.append(line)
+                if cabecalho:
+                    seq_list.append(cabecalho)
+                    cabecalho = ""
+                break
+           
+
     '''Para cada elemento da lista de linhas, é adicionado um novo elemento no limite entre '>' e '|' '''
 
-    labels = []
-    cabecalho = ""
-    for element in lines:
-        for caracter in element:
-            if element != "|":
+
+    for element in label_list:
+        for i in element:
+            if i != "|":
                 cabecalho = caracter
             
-            if element == "|":
+            if i == "|":
                 break
 
-        labels.append(cabecalho)
+        label_list.append(cabecalho)
 
     '''TODO Um dicionário que receba as labels como key, e o que vem após elas até o próximo '>' como sequência'''    
 
-    #dicionario = {}
 
     
     #print ("Labels: %s"%labels)
-    #print("")
+    #print()
 
     refArquivoMulti.close()
-
 
 
 ## QUESTÃO 3 ##
 
 def questao3():
-    pass
+
+    refArquivoEntrada = open("C:/Users/maias/Documents/GitHub/CFB017-SAINT/TAC1/species.csv")
+    refArquivoEntrada.readline()
+    for linha in refArquivoEntrada:
+        data = linha.split(",")
+        if data[3].upper().rstrip() == "BIRD":
+            print ("%s\t%s\t%s\t%s" %(data[0], data[1], data[2], data[3].rstrip()))
+    refArquivoEntrada.close()
+
+print(questao3)
 
 ## QUESTÃO 4 ##
 
