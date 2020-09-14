@@ -26,23 +26,41 @@ def questao1():
 
 ## QUESTÃO 2 ##
 
-'''TODO laço for que crie uma chave para cada vez que encontrar '>' e tenha como value tudo que venha depois de '>'. '''
-
 def questao2():
 
-    dicionario = {}
-    cabecalho = ""
-    labels = []
+    '''Para cada linha no arquivo que tenha '>', uma copia é gerada como elemento de uma lista '''
 
+    primeira_linha = ""
+    lines = []
     for linha in refArquivoMulti:
         for caracter in linha:
             if caracter == ">":
             
-                cabecalho += linha
-                labels.append(cabecalho)
+                primeira_linha += linha
 
-    print ("Cabecalhos: %s"%labels)
-    print()
+            lines.append(primeira_linha)
+    
+    '''Para cada elemento da lista de linhas, é adicionado um novo elemento no limite entre '>' e '|' '''
+
+    labels = []
+    cabecalho = ""
+    for element in lines:
+        for caracter in element:
+            if element != "|":
+                cabecalho = caracter
+            
+            if element == "|":
+                break
+
+        labels.append(cabecalho)
+
+    '''TODO Um dicionário que receba as labels como key, e o que vem após elas até o próximo '>' como sequência'''    
+
+    #dicionario = {}
+
+    
+    #print ("Labels: %s"%labels)
+    #print("")
 
     refArquivoMulti.close()
 
@@ -50,7 +68,8 @@ def questao2():
 
 ## QUESTÃO 3 ##
 
-
+def questao3():
+    pass
 
 ## QUESTÃO 4 ##
 
