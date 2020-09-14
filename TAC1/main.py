@@ -5,42 +5,46 @@ refArquivoMulti = open("/Users/maias/Documents/GitHub/CFB017-SAINT/TAC1/TriTrypD
 
 ## QUESTÃO 1 ##
 
-primeira_linha = refArquivo.readline()[1:-1]
-cabecalho = ""
+def questao1():
 
-for caracter in primeira_linha:
-    if caracter != "|":
-        cabecalho += caracter
-    if caracter == "|":
-        break
+    primeira_linha = refArquivo.readline()[1:-1]
+    cabecalho = ""
 
-sequencia = ""
-for linha in refArquivo:
-    sequencia += linha.replace('\n','')
-print ("Cabecalho: %s"%cabecalho)
-print ("Sequencia: %s"%sequencia)
-refArquivo.close()
+    for caracter in primeira_linha:
+        if caracter != "|":
+            cabecalho += caracter
+        if caracter == "|":
+            break
+
+    sequencia = ""
+    for linha in refArquivo:
+        sequencia += linha.replace('\n','')
+    print ("Cabecalho: %s"%cabecalho)
+    print ("Sequencia: %s"%sequencia)
+    refArquivo.close()
 
 
 ## QUESTÃO 2 ##
 
 '''TODO laço for que crie uma chave para cada vez que encontrar '>' e tenha como value tudo que venha depois de '>'. '''
 
-dicionario = {}
+def questao2():
 
-for linha in refArquivoMulti.readline():
-    for caracter in linha:
-        if caracter == ">":
-            cabecalho += linha
-        
+    dicionario = {}
+    cabecalho = ""
+    labels = []
 
-cabecalho = refArquivoMulti.readline()[1:-1]
-sequencia = ""
-for linha in refArquivoMulti:
-    sequencia += linha.replace('\n','')
-print ("Cabecalho: %s"%cabecalho)
-print ("Sequencia: %s"%sequencia)
-refArquivoMulti.close()
+    for linha in refArquivoMulti:
+        for caracter in linha:
+            if caracter == ">":
+            
+                cabecalho += linha
+                labels.append(cabecalho)
+
+    print ("Cabecalhos: %s"%labels)
+    print()
+
+    refArquivoMulti.close()
 
 
 
