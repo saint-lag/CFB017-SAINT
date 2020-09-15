@@ -35,6 +35,7 @@ def questao2():
     '''Para cada linha no arquivo que tenha '>', uma copia é gerada como elemento de uma lista '''
 
     cabecalho = ""
+    sequencia = ""
     label_list = []
     seq_list = []
     label_seq = {}
@@ -43,28 +44,19 @@ def questao2():
         line = line.strip()
         for i in line:
             if i == ">":
-                label_list.append(line)
-                if cabecalho:
-                    cabecalho = "".join(line)
-                    label_list.append(cabecalho)
+                cabecalho.join(line)
+                label_list.append(cabecalho)
+                
+            elif:
+                sequencia.join(line)
+                
+            elif i == ">":
                 break
-            
-
-    '''Para cada elemento da lista de linhas, é adicionado um novo elemento no limite entre '>' e '|' '''
-
-def cabecalhos(label_list):
-    cabecalho = ""
-    for element in label_list:
-        for i in element:
-            if i != "|":
-                cabecalho = i
-            
-            if i == "|":
-                break
-
-        label_list.append(cabecalho)
-
-    '''TODO Um dicionário que receba as labels como key, e o que vem após elas até o próximo '>' como sequência'''    
+        
+        seq_list.append(sequencia)
+        sequencia = ""
+        
+    '''TODO Um dicionário que receba as labels como key - label_list - e as values - seq_list.'''    
 
 
     
