@@ -4,7 +4,7 @@ import csv
 ## QUESTÃO 1 ##
 
 def questao1():
-'''FUNCIONANDO'''
+    '''FUNCIONANDO'''
 
     refArquivo = open("/Users/maias/Documents/GitHub/CFB017-SAINT/TAC1/TcCLB50671780.fasta")
     primeira_linha = refArquivo.readline()[1:-1]
@@ -28,7 +28,7 @@ def questao1():
 
 
 def questao2():
-'''MEMORY ERROR'''
+    '''MEMORY ERROR'''
 
     refArquivoMulti = open("/Users/maias/Documents/GitHub/CFB017-SAINT/TAC1/TriTrypDB-47_TcruziCLBrenerEsmeraldo-like_AnnotatedProteins.fasta")
 
@@ -47,7 +47,7 @@ def questao2():
                 cabecalho.join(line)
                 label_list.append(cabecalho)
                 
-            elif:
+            elif i != ">":
                 sequencia.join(line)
                 
             elif i == ">":
@@ -55,16 +55,16 @@ def questao2():
         
         seq_list.append(sequencia)
         sequencia = ""
-        
-    '''TODO Um dicionário que receba as labels como key - label_list - e as values - seq_list.'''    
-
-
-    
-    #print ("Labels: %s"%labels)
-    #print()
 
     refArquivoMulti.close()
+    '''TODO Um dicionário que receba as labels como key - label_list - e as values - seq_list.'''  
 
+    return label_list, seq_list
+
+    
+if __name__ == "__main__":
+    questao2()
+    print("That's it")
 
 ## QUESTÃO 3 ##
 
@@ -78,7 +78,7 @@ def questao3():
             print ("%s\t%s\t%s\t%s" %(data[0], data[1], data[2], data[3].rstrip()))
     refArquivoEntrada.close()
 
-print(questao3)
+
 
 ## QUESTÃO 4 ##
 
