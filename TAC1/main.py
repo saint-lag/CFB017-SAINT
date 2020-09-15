@@ -25,9 +25,10 @@ def questao1():
 
 
 ## QUESTÃO 2 ##
-'''MEMORY ERROR'''
+
 
 def questao2():
+'''MEMORY ERROR'''
 
     refArquivoMulti = open("/Users/maias/Documents/GitHub/CFB017-SAINT/TAC1/TriTrypDB-47_TcruziCLBrenerEsmeraldo-like_AnnotatedProteins.fasta")
 
@@ -44,18 +45,19 @@ def questao2():
             if i == ">":
                 label_list.append(line)
                 if cabecalho:
-                    seq_list.append(cabecalho)
-                    cabecalho = ""
+                    cabecalho = "".join(line)
+                    label_list.append(cabecalho)
                 break
-           
+            
 
     '''Para cada elemento da lista de linhas, é adicionado um novo elemento no limite entre '>' e '|' '''
 
-
+def cabecalhos(label_list):
+    cabecalho = ""
     for element in label_list:
         for i in element:
             if i != "|":
-                cabecalho = caracter
+                cabecalho = i
             
             if i == "|":
                 break
