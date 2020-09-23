@@ -3,7 +3,7 @@ import pandas as pd
 import xlrd
 
 #abrindo o arquivo
-with open(r"C:\Users\maias\Documents\GitHub\CFB017-SAINT\TAC2\WHOPOPTB.xls") as WHOPOPTB:
+with open(r"C:\Users\maias\Documents\GitHub\CFB017-SAINT\exercicio_1\WHOPOPTB.xls") as WHOPOPTB:
 
 	#arquivo lido pelo pandas sendo passado para uma variável
 	WHOTBDATA = pd.read_excel("WHOPOPTB.xls")
