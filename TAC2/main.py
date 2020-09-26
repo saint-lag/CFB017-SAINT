@@ -4,7 +4,7 @@ import pandas
 import pandas as pd
 import xlrd 
 
-
+#criando função
 def AbsoluteQuantCalculator(sheet, m, b):
 	'''Insert: sheet, m and b values ... y = mx - b '''
 	
