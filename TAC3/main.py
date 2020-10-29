@@ -83,20 +83,16 @@ def blast(seq_path, multi_fasta_path):
 	# recebe os paths
 	#seq_path, multi_fasta_path = str(input('Caminho para o arquivo FASTA, multi-fasta: '))
 
-	# BLAST
-
-	
+	# BLAST: li a documentação do biopython mas não consegui fazer o blast funcionar
 	tac3_blast = '/Users/maias/Documents/GitHub/CFB017-SAINT/TAC3/tac3_blast.txt'
 
 	tcruzi_blast = NcbiblastxCommandline(query = seq_path, subject = multi_fasta_path, evalue = 0.05, outfmt = 6, out = tac3_blast)
 
 	stdout, stdeer = tcruzi_blast()
-
+	
+	# Usando pandar para receber o arquivo xlm e devolver o hit de maior score
 	result = pd.read_csv('/Users/maias/Documents/GitHub/CFB017-SAINT/TAC3/tac3_blast.txt', sep='\t')
-
+	
 	max_score = result.sort_values('bitscore')
 
 	print(max_score.iloc[[-1]])
-
-# TESTE:
-print(blast('/Users/maias/Documents/GitHub/CFB017-SAINT/TAC3/sequenciaDesconhecida.fasta', '/Users/maias/Documents/GitHub/CFB017-SAINT/TAC3/TriTrypDB-47_TcruziCLBrenerEsmeraldo-like_AnnotatedProteins(1).fasta'))
