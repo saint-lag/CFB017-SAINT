@@ -35,7 +35,7 @@ def MotifFinder(sequence, motif):
 
 		if count != 0:
 			id_counter += 1
-			print("ID:", i_id, "\nSequence:", i_seq, "\nCounter:", count)
+			print("ID:", i_id, "\nCounter:", count)
 
 	print("\nID Counter:", id_counter, sep="")
 
