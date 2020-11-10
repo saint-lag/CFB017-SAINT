@@ -2,9 +2,8 @@
 from functions import *
 from Bio import SeqIO
 from Bio.Seq import Seq
+import pandas as pd
 import csv
-
-
 
 
 '''Codigo deve comportar uma classe que receba:
@@ -25,9 +24,10 @@ Dentro da classe, ocorrerá a ação das funções de functions.py
 
 ### INPUT DO USUARIO ###
 
-tabela_1 = input('Tabela xlsx: ')
-arquivo_1 = input('multi-FASTA dos genes da espécie alvo: ')
-arquivo_2 = input('multi-FASTA dos AA da espécie parente (próxima): ')
+tabela_1 = pd.read_excel('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/Tabela_1.xlsx')
+temp_arq1 = open('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/Rdesconhecidus.fasta', 'r')
+arquivo_1 = temp_arq1.read()
+arquivo_2 = open('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/VectorBase-48_RprolixusCDC_AnnotatedProteins.fasta', 'r')
 
 
 ### CLASSE ###
@@ -36,10 +36,9 @@ class EspecieAlvo():
 	def __init__(self, table, kdna_seq, familiar_aa, label):
 		self._label = label
 		self._table = table
-		self._kdna_seq = kdna_seq
-				
-	def __str__(self):
-		return f'\nT1: {self._table}\nA1: {self._kdna_seq}\nA2: {self._familiar_aa}, L:{self._label}'
+		self._kdna_seq = kdna_seq.read()
+		self._familiar_aa = familiar_aa.read()
+
 
 
 ### TODO ###
@@ -50,13 +49,14 @@ etapa do algorítmo
 
 
 ### BUG ###
-'''Na criação do objeto, EspecieAlvo(r_desconhecidus): 
-TypeError: __init__() missing 3 required positional arguments:
-'kdna_seq', 'familiar_aa', and 'label'
+'''
+ALL SOLVED
+
 '''
 
 ### TESTE ###
 
-r_desconhecidus = EspecieAlvo(tabela_1, arquivo_1, arquivo_2, 'R.desconhecidus')
-print(EspecieAlvo(r_desconhecidus))
+#r_desconhecidus = EspecieAlvo(tabela_1, arquivo_1, arquivo_2, 'R.desconhecidus')
+#print(r_desconhecidus)
 
+print(arquivo_1)
