@@ -1,15 +1,12 @@
 
 
 
-'''1 - Escreva um programa chamado “controleAquisicaoBioMol.py” que leia 
-uma relação de materiais de laboratório de biologia molecular digitada pelo 
-usuário que serão consultados para aquisição. 
+'''1 - Escreva um programa chamado “controleAquisicaoBioMol.py” que leia uma relação de materiais de laboratório de biologia molecular digitada pelo usuário que serão consultados para aquisição. 
 
 a) O programa vai ler produto, preço e quantidade até que o usuário digite “-1” para parar. 
 
 b) O programa armazenará em um dicionário onde o produto será a chave referente à uma lista 
-contendo o preço e quantidade deste produto, ou seja, a chave será “produto” e o valor 
-será uma lista [preço, quantidade]. 
+contendo o preço e quantidade deste produto, ou seja, a chave será “produto” e o valor será uma lista [preço, quantidade]. 
 
 Exemplo:
 

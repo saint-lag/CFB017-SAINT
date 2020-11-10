@@ -1,6 +1,5 @@
 
 
-'''
 
 1 - Faça um programa que leia um número indeterminado de valores e armazene numa lista, 
 correspondentes a notas, encerrando a entrada de dados quando for informado um valor igual a -1 
@@ -20,9 +19,10 @@ Caso seja passado dois valores como argumentos, a área é dada pela multiplica�
 Ou seja, a função terá um argumento opcional.
  
 3 - Escreva um código que leia uma frase digitada pelo usuário. Em seguida, escreva: 
-uma função lambda que identifique quando um caractere é uma vogal
-uma função lambda que identifique quando um caractere é uma consoante
-uma função lambda identifique quando um caractere é um número. Dica:
+uma função lambda que identifique quando um caractere é uma vogal;
+uma função lambda que identifique quando um caractere é uma consoante;
+uma função lambda que identifique quando um caractere é um número. 
+Dica:
 
 >>> ## No terminal de Python
 >>> "a" in "ABCDEF"
@@ -31,20 +31,6 @@ False
 True
 >>> "1" in "ABCDEF1234567"
 True
-
-'''
-
-# parte 3 
-
-frase = str(input('Insira uma frase: '))
-
-frase = frase.upper()
-
-vogais = ['A','E','I','O','U']
-vogal = lambda frase: if i in vogais: print('%s é uma vogal' % i)
-
-consoantes = []
-
 
 
 

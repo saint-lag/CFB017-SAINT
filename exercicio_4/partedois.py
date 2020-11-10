@@ -2,6 +2,7 @@
 
 
 def calculaAreaRetangulo():
+	'''funcionando'''
 	
 	x = input('Dê me de um a dois lados: ')
 	y = input('Dê me de um a dois lados: ')
@@ -18,5 +19,6 @@ def calculaAreaRetangulo():
 
 	print(area)
 
+### TEST ###
 
 print(calculaAreaRetangulo())

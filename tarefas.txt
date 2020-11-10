@@ -1,0 +1,16 @@
+
+
+
+FALTAM:
+
+ex4.:
+	parte_hum.py
+	partetres.py
+	(Até HOJE, dia 09/11)
+
+TAC5:
+	toda
+
+trabalho_final:
+	todo
+	(Até dia 16/11)
