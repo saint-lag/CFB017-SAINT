@@ -20,8 +20,7 @@ b) A Tabela 1 contém os identificadores dos genes e os valores de expressão n�
 c) Crie colunas adicionais para adicionar os níveis de expressão normalizados por CPM (counts per million) de cada réplica. 
 Nomeie essas colunas como Rep1_A_CPM, Rep2_A_CPM, Rep1_B_CPM e Rep2_B_CPM;
 
-d) Crie colunas adicionais que vão armazenar a expressão normalizada (CPM) média por condição. 
-Nomeie as colunas como Cond_A_CPM_media e Cond_B_CPM_media;
+d) Crie colunas adicionais que vão armazenar a expressão normalizada (CPM) média por condição. Nomeie as colunas como Cond_A_CPM_media e Cond_B_CPM_media;
 
 e) Selecione os cinco genes mais expressos de cada condição baseado na expressão média.
 

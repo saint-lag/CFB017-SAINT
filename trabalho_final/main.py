@@ -26,9 +26,9 @@ Dentro da classe, ocorrerá a ação das funções de functions.py
 
 tabela_1 = pd.read_excel('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/Tabela_1.xlsx')
 temp_arq1 = open('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/Rdesconhecidus.fasta', 'r')
-arquivo_1 = temp_arq1.read()
-arquivo_2 = open('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/VectorBase-48_RprolixusCDC_AnnotatedProteins.fasta', 'r')
-
+arquivo_1 = temp_arq1.readlines(1000)
+temp_arq2 = open('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/VectorBase-48_RprolixusCDC_AnnotatedProteins.fasta', 'r')
+arquivo_2 = temp_arq2.readlines(1000)
 
 ### CLASSE ###
 
@@ -36,10 +36,11 @@ class EspecieAlvo():
 	def __init__(self, table, kdna_seq, familiar_aa, label):
 		self._label = label
 		self._table = table
-		self._kdna_seq = kdna_seq.read()
-		self._familiar_aa = familiar_aa.read()
+		self._kdna_seq = kdna_seq
+		self._familiar_aa = familiar_aa
 
-
+	def __str__(self):
+		return f'[Label]: {self._label}\n[Table]: {self._table}\n[Known DNA]: {self._kdna_seq}\n[Familiar AA]: {self._familiar_aa}'
 
 ### TODO ###
 '''1. Separar por módulos de desenvolvimento, a fim de não perder muito tempo numa
@@ -56,7 +57,6 @@ ALL SOLVED
 
 ### TESTE ###
 
-#r_desconhecidus = EspecieAlvo(tabela_1, arquivo_1, arquivo_2, 'R.desconhecidus')
-#print(r_desconhecidus)
+r_desconhecidus = EspecieAlvo(tabela_1, arquivo_1, arquivo_2, 'R.desconhecidus')
+print(r_desconhecidus)
 
-print(arquivo_1)
