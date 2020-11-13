@@ -1,6 +1,16 @@
 
 import sys
+from operacoesCompra import *
 
+class controleAquisicaoBioMol():
+	def __init__(self, estoque):
+		self._estoque = estoque
+		self._produtos = imprimeProdutos(self._estoque)
+		self._quantidade = imprimeQuantidades(self._estoque)
+		self._total = calculaTotalCompra(self._estoque)
+
+	def __str__(self):
+		return f'{self._total},\n{type(self._estoque)}'
 
 def main():
     i = True
@@ -10,11 +20,12 @@ def main():
         preco = float(input("Preço: "))
         quant = int(input("Quantidade:"))
         if produto == '-1' or preco == -1 or quant == -1:
-            break
+            i = False
         else:
             estoque[produto] = [preco, quant]
 
-    print(estoque)
+    return estoque 
+	
 
-
-print(main())
+estoque = main()
+compra = controleAquisicaoBioMol(estoque)
