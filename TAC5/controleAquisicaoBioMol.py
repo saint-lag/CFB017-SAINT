@@ -2,20 +2,21 @@
 import sys
 from operacoesCompra import *
 
-class controleAquisicaoBioMol():
+class compraDeProdutos():
 	def __init__(self, estoque):
 		self._estoque = estoque
 		self._produtos = imprimeProdutos(self._estoque)
 		self._quantidade = imprimeQuantidades(self._estoque)
-		self._total = calculaTotalCompra(self._estoque)
+		#self._total = calculaTotalCompra(self._estoque)
 
-	def __str__(self):
-		return f'{self._total},\n{type(self._estoque)}'
+    def __str__(self):
+        return f'[Estoque]: {self._estoque},\n[Produtos]: {self._produtos}'
+
 
 def main():
     i = True
     estoque = {}
-    while i is True:
+    while i:
         produto = str(input("Nome do produto: "))
         preco = float(input("Preço: "))
         quant = int(input("Quantidade:"))
@@ -28,4 +29,6 @@ def main():
 	
 
 estoque = main()
-compra = controleAquisicaoBioMol(estoque)
+compra = compraDeProdutos(estoque)
+
+

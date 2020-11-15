@@ -18,45 +18,56 @@ def ColunasNormalizadasCPM(sheet):
 	(CPM) média por condição. Nomeia as colunas como Cond_A_CPM_media e
 	Cond_B_CPM_media '''
 
-	# dataframe
-	df = pd.read_excel(sheet)
+	# TERMINADO #
 	
-	# Adicionando colunas com os níveis de expressão normalizados(CPM)
-	df_q = df
-	df_q[['Rep1_A_CPM','Rep1_B_CPM','Rep2_A_CPM','Rep2_B_CPM']] 
-
-	# CPM média por condição, aplicar formular de CPM media em cada Cond.
-	df_q['Cond_A_CPM_media', 'Cond_B_CPM_media'] 
-
-	# df + df_q == df_final 
-	df_final = pd.merge(df,df_q)
-	df_final.to_excel('Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final', sheet_name = 'TabelaNormalizada.xlrd')
-
-	# retorna a nova tabela
-	with open('Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/TabelaNormalizada.xlrd') as tabela:
-		#return tabela
+	tabela = pd.read_excel(sheet)
 	
-	pass
+	coluna1 = tabela.iloc[:,1]
+	coluna2 = tabela.iloc[:,2]
+	coluna3 = tabela.iloc[:,3]
+	coluna4 = tabela.iloc[:,4]
+
+	soma1 = sum(coluna1)
+	soma2 = sum(coluna2)
+	soma3 = sum(coluna3)
+	soma4 = sum(coluna4)
+
+	coluna_nova1 = pd.DataFrame()
+	coluna_nova1["Rap_1A_CPM"] = (coluna1*1000000)/soma1
+	coluna_nova2 = pd.DataFrame()
+	coluna_nova2["Rap_2A_CPM"] = (coluna2*1000000)/soma2
+	coluna_nova3 = pd.DataFrame()
+	coluna_nova3["Rap_1B_CPM"] = (coluna3*1000000)/soma3
+	coluna_nova4 = pd.DataFrame()
+	coluna_nova4["Rap_2B_CPM"] = (coluna4*1000000)/soma4
+
+	tabela_nova1 = pd.concat([tabela,coluna_nova1, coluna_nova2, coluna_nova3, coluna_nova4], axis=1)
 	
-def GenesMaisExpressos(sheet):
+	coluna5 = tabela_nova1.iloc[:,5]
+	coluna6 = tabela_nova1.iloc[:,6]
+	coluna7 = tabela_nova1.iloc[:,7]
+	coluna8 = tabela_nova1.iloc[:,8]
+
+	media_A = pd.DataFrame()
+	media_A["Cond_A_CPM_media"] = (coluna5 + coluna6)/2
+	media_B = pd.DataFrame()
+	media_B["Cond_B_CPM_media"] = (coluna7 + coluna8)/2
+	tabela_nova2 = pd.concat([tabela_nova1,media_A, media_B], axis=1)
+
+	return tabela_nova2
+
+
+def GenesMaisExpressos(new_sheet):
 	'''Selecione os cinco genes mais expressos de cada 
 	condição baseado na expressão média.'''
-	genes = []
-	tabela = pd.read_excel(sheet)
 
-	# usando pandas para encontrar os mais expressos em CondA e CondB
 
-	'''os genes mais expressos foram guardados numa lista.
-	Para trabalhar com eles, será necessário uma pesquisa com Biopython no
-	arquivo multi-FASTA (arquivo_1); assim, guardando-os em um novo 
-	arquivo multi-FASTA'''
+	genes_xA = new_sheet['Cond_A_CPM_media'].nlargest()
+	genes_xB = new_sheet['Cond_B_CPM_media'].nlargest() 	
+	
 
-	#genes_xA = ''
-	#genes_xB = ''
-
-	#return genes_xA, genes_xB
-	pass
-
+	return genes_xA, genes_xB
+	
 
 ### Funções que envolvem a aplicação de BLAST ###
 
@@ -80,3 +91,6 @@ def Bitscore(blast):
 '''
 	
 	pass
+
+
+#print(ColunasNormalizadasCPM('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/Tabela_1.xlsx'))
