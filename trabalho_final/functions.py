@@ -65,23 +65,52 @@ def GenesMaisExpressos(new_sheet):
 	genes_xA = new_sheet['Cond_A_CPM_media'].nlargest()
 	genes_xB = new_sheet['Cond_B_CPM_media'].nlargest() 	
 	
+	genes_xA = genes_xA.index.values.tolist()
+	genes_xB = genes_xB.index.values.tolist()
+
+	genes_xA=[str(int) for int in genes_xA]
+	genes_xB=[str(int) for int in genes_xB]
+
 
 	return genes_xA, genes_xB
-	
 
-### Funções que envolvem a aplicação de BLAST ###
 
-def BlastGenes10(genes_xA, genes_xB, familiar_aa):
+### BLAST ###
+
+
+def BlastGenes10(genes_xA, genes_xB, krna_seq, familiar_aa):
 	'''Realize uma busca BLAST da sequência de DNA dos 
 	10 genes selecionados anteriormente contra as 
 	sequências de aminoácidos de R. prolixus.'''
-	
-	# Legenda: 'genes_xA'/'genes_xB' são os genes mais expressos em formato de multifasta
-	
+	from Bio.Blast.Applications import NcbiblastxCommandline
 
-	pass
-	
-	
+	genes_seq_a = []
+	genes_seq_b = []
+
+
+	for i in SeqIO.parse(krna_seq, 'fasta'):
+		for n in genes_xA:
+			if i.id == 'gene_%s'%n:
+				genes_seq_a.append(i.seq)
+		for n in genes_xB:
+			if i.id == 'gene_%s'%n:
+				genes_seq_b.append(i.seq)
+
+
+	sequencia = familiar_aa
+	blastx = '/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blastx.exe'
+
+	for x in genes_seq_a:
+		for x in genes_seq_b:
+			meuOutPut = 'blast_%s.txt'%x
+			meu_comando = NcbiblastxCommandline( query = x, subject = sequencia, outfmt = 6, out = meuOutPut, evalue = 0.05, cmd = blastx)
+			stdout, stderr = meu_comando()
+
+
+
+	return 
+
+
 def Bitscore(blast):
 	'''A partir do resultado do BLAST, imprima o melhor 
 	hit para cada um dos 10 genes baseado no maior valor 
