@@ -92,8 +92,6 @@ def BlastTest(genes_xA, genes_xB, krna_seq, familiar_aa):
 
 
 def ArchiveGenes(genes_xA, genes_xB, krna_seq):
-	
-
 	# Lista para testar o codigo
 	lst=[]
 
@@ -143,7 +141,6 @@ def BlastGenes10(genes_xA, genes_xB, krna_seq, familiar_aa):
 	sequências de aminoácidos de R. prolixus.'''
 
 	from Bio.Blast.Applications import NcbiblastxCommandline
-	import re
 
 	# Blast dos arquivos
 	sequencia = familiar_aa
@@ -159,30 +156,27 @@ def BlastGenes10(genes_xA, genes_xB, krna_seq, familiar_aa):
 	
 	count = 0
 	for file in os.listdir(directory_a):
-		y = genes_xA[count]
-		meuOutPut = 'blast_a%s.txt'%y
-		file_path = str(os.path.realpath(file))
-		file_path = file_path.replace('\\', '/')
-		meu_comando = NcbiblastxCommandline(query = file_path, subject = sequencia, outfmt = 6, out = meuOutPut, evalue = 0.05, cmd = blastx)
-		stdout, stderr = meu_comando()
-		count += 1
+		if file.endswith('.fasta'):
+			y = genes_xA[count]
+			meuOutPut = 'blast_a%s.txt'%y
+			file_path = str(os.path.dirname(os.path.realpath(file)))
+			file_path = file_path.replace('\\', '/')
+			file_path = file_path.join('/blast_genesA/%s'%file)
+			print(file_path)
+			meu_comando = NcbiblastxCommandline(query = file_path, subject = sequencia, outfmt = 6, out = meuOutPut, evalue = 0.05, cmd = blastx)
+			stdout, stderr = meu_comando()
+			count += 1 
 
 	count = 0
 	for file in os.listdir(directory_b):
-		y = genes_xB[count]
-		meuOutPut = 'blast_b%s.txt'%y
-		file_path = str(os.path.realpath(file))
-		file_path = file_path.replace('\\', '/')
-		meu_comando = NcbiblastxCommandline( query = file_path, subject = sequencia, outfmt = 6, out = meuOutPut, evalue = 0.05, cmd = blastx)
-		stdout, stderr = meu_comando()
-		count += 1
+		if file.endswith('.fasta'):
+			y = genes_xB[count]
+			meuOutPut = 'blast_b%s.txt'%y
+			file_path = str(os.path.dirname(os.path.realpath(file)))
+			file_path = file_path.replace('\\', '/')
+			file_path = file_path.join('/blast_genesB/%s'%file)
+			meu_comando = NcbiblastxCommandline( query = file_path, subject = sequencia, outfmt = 6, out = meuOutPut, evalue = 0.05, cmd = blastx)
+			stdout, stderr = meu_comando()
+			count += 1
 
 
-
-def Bitscore(blast):
-	'''A partir do resultado do BLAST, imprima o melhor 
-	hit para cada um dos 10 genes baseado no maior valor 
-	de bitscore. Em caso de bitscores iguais, selecione o 
-	hit com menor e-value. Caso o empate persista, selecione 
-	qualquer um dos hits empatados.
-'''
