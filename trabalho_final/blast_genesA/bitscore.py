@@ -12,11 +12,23 @@ def Bitscore():
 	directory_a = '/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesA'
 	directory_b = '/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesB'
 
-	bitscore_fileA = open('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesA/bitscore_fileA.txt', 'x')
+	bitscore_fileA = open('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesA/bitscore_fileA.xlsx', 'x')
+
 	for file in os.listdir(directory_a):
 		if file.endswith('.txt'):
+
 			result = pd.read_csv(file, sep="\t", names=["qseqid","sseqid","pident","length","mismatch","gapopen","qstart","qend","sstart","send","evalue","bitscore"])
-			print(result)
-			bitscore_fileA.write(str(result))
+
+			maximo_score = result.sort_values('bitscore')
+			i = maximo_score.iloc[[-1]]
+
+			print(i)
+
+			bitscore_fileA.write(str(i))
 
 Bitscore()
+
+
+
+'''A ideia do codigo é criar um novo arquivo que recebe esses dataframes, mas somente com o gene com maior bitscore de cada. 
+O ideal é que tambem compare entre os dataframes qual é o mais expresso'''
