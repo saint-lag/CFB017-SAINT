@@ -143,7 +143,7 @@ def BlastGenes10(genes_xA, genes_xB, krna_seq, familiar_aa):
 	sequências de aminoácidos de R. prolixus.'''
 
 	from Bio.Blast.Applications import NcbiblastxCommandline
-
+	import re
 
 	# Blast dos arquivos
 	sequencia = familiar_aa
@@ -161,8 +161,8 @@ def BlastGenes10(genes_xA, genes_xB, krna_seq, familiar_aa):
 	for file in os.listdir(directory_a):
 		y = genes_xA[count]
 		meuOutPut = 'blast_a%s.txt'%y
-		file_path = pathlib.Path(file).parent.absolute()
-		file_path = str(file_path).join(file)
+		file_path = str(os.path.realpath(file))
+		file_path = file_path.replace('\\', '/')
 		meu_comando = NcbiblastxCommandline(query = file_path, subject = sequencia, outfmt = 6, out = meuOutPut, evalue = 0.05, cmd = blastx)
 		stdout, stderr = meu_comando()
 		count += 1
@@ -171,8 +171,8 @@ def BlastGenes10(genes_xA, genes_xB, krna_seq, familiar_aa):
 	for file in os.listdir(directory_b):
 		y = genes_xB[count]
 		meuOutPut = 'blast_b%s.txt'%y
-		file_path = pathlib.Path(file).parent.absolute()
-		file_path.join(file)
+		file_path = str(os.path.realpath(file))
+		file_path = file_path.replace('\\', '/')
 		meu_comando = NcbiblastxCommandline( query = file_path, subject = sequencia, outfmt = 6, out = meuOutPut, evalue = 0.05, cmd = blastx)
 		stdout, stderr = meu_comando()
 		count += 1
@@ -186,4 +186,3 @@ def Bitscore(blast):
 	hit com menor e-value. Caso o empate persista, selecione 
 	qualquer um dos hits empatados.
 '''
-	

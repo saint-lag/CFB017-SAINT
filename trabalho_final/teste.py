@@ -18,4 +18,19 @@ def BlastTest(familiar_aa):
 
 
 
-print(BlastTest('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/VectorBase-48_RprolixusCDC_AnnotatedProteins.fasta'))
+#print(BlastTest('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/VectorBase-48_RprolixusCDC_AnnotatedProteins.fasta'))
+
+
+import pathlib
+import os 
+def File():
+	file_list = []
+	directory = '/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesA'
+	for file in os.listdir(directory):
+		file_path = os.path.abspath(file)
+		file_list.append(str(file_path))
+
+		print(file)
+
+
+print(File())
