@@ -20,6 +20,7 @@ iii) um arquivo multi-fasta contendo sequências de AA da espécie parente
 
 Dentro da classe, ocorrerá a ação das funções de functions.py
 
+
 ''' 
 
 
@@ -38,11 +39,12 @@ class EspecieAlvo():
 		self._familiar_aa = open(familiar_aa, 'r')
 		self._sheet = ColunasNormalizadasCPM(sheet)
 		self._genes_xA, self._genes_xB = GenesMaisExpressos(self._sheet)
-		self._blast_result = BlastGenes10(self._genes_xA, self._genes_xB, self._krna_seq, self._familiar_aa)
+		self._archives = ArchiveGenes(self._genes_xA, self._genes_xB, self._krna_seq)
+		self._blast_result = BlastGenes10(self._genes_xA, self._genes_xB, self._krna_seq, familiar_aa)
 		#self.bitscore = Bitscore(self._blast_result)
 
 	def __str__(self):
-		return f'[Label]: {self._label}\n[Most Expressed Genes]: {self._genes_xA}, {self._genes_xB}\n[Blast]: {self._blast_result}'
+		return f'[Label]: {self._label}\n[Most Expressed Genes]: {self._genes_xA}, {self._genes_xB}\n[bool]: {self._archives}\n[Blast]:{self._blast_result}'
 
 ### TODO ###
 '''1. Separar por módulos de desenvolvimento, a fim de não perder muito tempo numa
@@ -54,7 +56,6 @@ etapa do algorítmo
 ### BUG ###
 
 '''
-ALL SOLVED
 
 '''
 

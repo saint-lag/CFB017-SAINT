@@ -77,38 +77,106 @@ def GenesMaisExpressos(new_sheet):
 
 ### BLAST ###
 
+def BlastTest(genes_xA, genes_xB, krna_seq, familiar_aa):
+
+	from Bio.Blast.Applications import NcbiblastxCommandline
+
+	sequencia = familiar_aa
+	blastx = 'C:/Program Files/NCBI/blast-2.11.0+/bin/blastx.exe'
+	meuOutPut = 'blast_test.txt'
+	q = '/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/teste.fasta'
+	meu_comando = NcbiblastxCommandline(query = q, subject = sequencia, outfmt = 6, out = meuOutPut, evalue = 0.05, cmd = blastx)
+	stdout, stderr = meu_comando()
+
+	return meuOutPut
+
+
+def ArchiveGenes(genes_xA, genes_xB, krna_seq):
+	
+
+	# Lista para testar o codigo
+	lst=[]
+
+	# Listas que recebem os i.seq de cada gene
+	genes_seq_a = []
+	genes_seq_b = []
+
+	# Procura as sequencias
+	for i in SeqIO.parse(krna_seq, 'fasta'):
+		for y in genes_xA:
+			if i.id == 'gene_%s'%y:
+				genes_seq_a.append(i.seq)
+		for y in genes_xB:
+			if i.id == 'gene_%s'%y:
+				genes_seq_b.append(i.seq)
+
+
+	# Transforma as sequências em Fasta
+	count = 0
+	for i in genes_seq_a:
+		y = genes_xA[count]
+		if count < len(genes_xA):
+			file = open('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesA/gene_%s.fasta'%y, 'x')
+			file.write(str(i))
+			file.close()
+			count += 1
+		else:
+			break
+
+	count = 0
+	for i in genes_seq_b:
+		y = genes_xB[count]
+		if count < len(genes_xB):
+			file = open('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesB/gene_%s.fasta'%y, 'x')
+			file.write(str(i))
+			count += 1
+			file.close()
+		else:
+			break 
+	
+	return True
+
 
 def BlastGenes10(genes_xA, genes_xB, krna_seq, familiar_aa):
 	'''Realize uma busca BLAST da sequência de DNA dos 
 	10 genes selecionados anteriormente contra as 
 	sequências de aminoácidos de R. prolixus.'''
+
 	from Bio.Blast.Applications import NcbiblastxCommandline
 
-	genes_seq_a = []
-	genes_seq_b = []
 
-
-	for i in SeqIO.parse(krna_seq, 'fasta'):
-		for n in genes_xA:
-			if i.id == 'gene_%s'%n:
-				genes_seq_a.append(i.seq)
-		for n in genes_xB:
-			if i.id == 'gene_%s'%n:
-				genes_seq_b.append(i.seq)
-
-
+	# Blast dos arquivos
 	sequencia = familiar_aa
-	blastx = '/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blastx.exe'
+	blastx = 'C:/Program Files/NCBI/blast-2.11.0+/bin/blastx.exe'
+	
+	# Arquivos alocados em pastas
+	import os
+	directory_a = '/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesA'
+	directory_b = '/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesB'
 
-	for x in genes_seq_a:
-		for x in genes_seq_b:
-			meuOutPut = 'blast_%s.txt'%x
-			meu_comando = NcbiblastxCommandline( query = x, subject = sequencia, outfmt = 6, out = meuOutPut, evalue = 0.05, cmd = blastx)
-			stdout, stderr = meu_comando()
+	#for file in os.listdir(directory_a):
+	import pathlib
+	
+	count = 0
+	for file in os.listdir(directory_a):
+		y = genes_xA[count]
+		meuOutPut = 'blast_a%s.txt'%y
+		file_path = pathlib.Path(file).parent.absolute()
+		file_path = str(file_path).join(file)
+		meu_comando = NcbiblastxCommandline(query = file_path, subject = sequencia, outfmt = 6, out = meuOutPut, evalue = 0.05, cmd = blastx)
+		stdout, stderr = meu_comando()
+		count += 1
 
+	count = 0
+	for file in os.listdir(directory_b):
+		y = genes_xB[count]
+		meuOutPut = 'blast_b%s.txt'%y
+		file_path = pathlib.Path(file).parent.absolute()
+		file_path.join(file)
+		meu_comando = NcbiblastxCommandline( query = file_path, subject = sequencia, outfmt = 6, out = meuOutPut, evalue = 0.05, cmd = blastx)
+		stdout, stderr = meu_comando()
+		count += 1
 
-
-	return 
 
 
 def Bitscore(blast):
@@ -119,7 +187,3 @@ def Bitscore(blast):
 	qualquer um dos hits empatados.
 '''
 	
-	pass
-
-
-#print(ColunasNormalizadasCPM('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/Tabela_1.xlsx'))
