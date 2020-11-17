@@ -1,5 +1,8 @@
 
+from blast_genesA.bitscore import *
+from blast_genesB.bitscore import *
 from functions import *
+
 from Bio import SeqIO
 from Bio.Seq import Seq
 import pandas as pd
@@ -44,13 +47,10 @@ class EspecieAlvo():
 		#self._blast_result = BlastGenes10(self._genes_xA, self._genes_xB, self._krna_seq, familiar_aa)
 
 	def __str__(self):
-		return f'[Label]: {self._label}\n[Most Expressed Genes]: {self._genes_xA}, {self._genes_xB}\n[bool]: {self._archives}'
+		return f'[Label]: {self._label}\n[Most Expressed Genes]: {self._genes_xA}, {self._genes_xB}\n'
 
 ### TODO ###
-'''1. Separar por módulos de desenvolvimento, a fim de não perder muito tempo numa
-etapa do algorítmo
 
-2. Entender todos objetivos de trabalho_final/readme.txt'''
 
 
 ### BUG ###

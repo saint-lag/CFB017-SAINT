@@ -9,15 +9,14 @@ def Bitscore():
 
 	import pandas as pd
 	import os
-	import io
 
 	directory_a = '/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesA'
 	directory_b = '/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesB'
 
 
-	bitscore_fileB = open('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesB/bitscore_fileB.xlsx', 'x')
+	#bitscore_fileB = open('/Users/maias/Documents/GitHub/CFB017-SAINT/trabalho_final/blast_genesB/bitscore_fileB.xlsx', 'x')
 	
-
+	ptn = []
 	for file in os.listdir(directory_b):
 		if file.endswith('.txt'):
 
@@ -26,10 +25,10 @@ def Bitscore():
 			maximo_score = result.sort_values('bitscore')
 			i = maximo_score.iloc[[-1]]
 
-			print(i)
-
-			
-
+			ptn.append(i['sseqid'])
 			#bitscore_fileB.write(str(i))
-Bitscore()
 
+	print(ptn)
+
+
+#Bitscore()
